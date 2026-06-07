@@ -12,6 +12,8 @@ from hallucination_replay.storage.init import (
     TraceSearch,
     compress_trace_file,
     decompress_trace_file,
+    export_trace,
+    export_traces,
     filter_traces,
 )
 
@@ -27,5 +29,7 @@ __all__ = [
     "TraceSearch",
     "compress_trace_file",
     "decompress_trace_file",
+    "export_trace",
+    "export_traces",
     "filter_traces",
 ]
