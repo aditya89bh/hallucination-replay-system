@@ -9,6 +9,8 @@ from hallucination_replay.storage.init import (
     TraceLifecycleManager,
     TraceRepository,
     TraceSearch,
+    compress_trace_file,
+    decompress_trace_file,
     filter_traces,
 )
 
@@ -21,5 +23,7 @@ __all__ = [
     "TraceLifecycleManager",
     "TraceRepository",
     "TraceSearch",
+    "compress_trace_file",
+    "decompress_trace_file",
     "filter_traces",
 ]
