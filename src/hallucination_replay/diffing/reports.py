@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from collections.abc import Mapping, Sequence
 
 from hallucination_replay.diffing.comparison import ExecutionComparison
@@ -66,3 +67,19 @@ def _render_value(value: object, indent: int) -> list[str]:
     if isinstance(value, Sequence) and not isinstance(value, str):
         return [f"{prefix}- {item}" for item in value]
     return [f"{prefix}- {value}"]
+
+
+def generate_comparison_json_report(comparison: ExecutionComparison) -> str:
+    """Generate a deterministic structured JSON comparison report."""
+    data = comparison.to_dict()
+    payload = {
+        "report_type": "execution_comparison",
+        "run_a_id": comparison.trace_diff.run_a_id,
+        "run_b_id": comparison.trace_diff.run_b_id,
+        "status_changed": comparison.trace_diff.status_changed,
+        "change_counts": {
+            section: _count_changes(data[section]) for section in sorted(data)
+        },
+        "comparison": data,
+    }
+    return json.dumps(payload, sort_keys=True)
