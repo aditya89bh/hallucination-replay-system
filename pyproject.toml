@@ -30,6 +30,7 @@ classifiers = [
   "Typing :: Typed"
 ]
 dependencies = [
+  "fastapi>=0.115,<1",
   "pydantic>=2.12,<3",
   "pydantic-settings>=2.12,<3",
   "structlog>=25.5,<26"
@@ -42,6 +43,7 @@ dev = [
   "pre-commit>=4.5",
   "pytest>=9.0",
   "pytest-cov>=7.0",
+  "httpx>=0.28,<1",
   "ruff>=0.15"
 ]
 
