@@ -10,6 +10,7 @@ from hallucination_replay.storage.index import TraceIndex, TraceIndexEntry
 from hallucination_replay.storage.json_store import JsonTraceStore
 from hallucination_replay.storage.lifecycle import TraceLifecycleManager
 from hallucination_replay.storage.repository import TraceRepository
+from hallucination_replay.storage.retention import TraceRetentionPolicy
 from hallucination_replay.storage.search import TraceSearch
 
 __all__ = [
@@ -20,6 +21,7 @@ __all__ = [
     "TraceIndexEntry",
     "TraceLifecycleManager",
     "TraceRepository",
+    "TraceRetentionPolicy",
     "TraceSearch",
     "compress_trace_file",
     "decompress_trace_file",
