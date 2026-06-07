@@ -1,6 +1,8 @@
 """Deterministic trace replay package."""
 
 from hallucination_replay.replay.init import (
+    ReplayCheckpoint,
+    ReplayCheckpointManager,
     ReplayController,
     ReplayNavigation,
     ReplaySession,
@@ -9,6 +11,8 @@ from hallucination_replay.replay.init import (
 )
 
 __all__ = [
+    "ReplayCheckpoint",
+    "ReplayCheckpointManager",
     "ReplayController",
     "ReplayNavigation",
     "ReplaySession",

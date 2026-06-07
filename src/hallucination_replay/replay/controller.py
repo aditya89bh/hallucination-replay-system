@@ -5,6 +5,10 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 from hallucination_replay.models import AgentStep, RunTrace
+from hallucination_replay.replay.checkpoints import (
+    ReplayCheckpoint,
+    ReplayCheckpointManager,
+)
 from hallucination_replay.replay.loader import ReplayTraceLoader
 from hallucination_replay.replay.navigation import ReplayNavigation
 from hallucination_replay.replay.session import ReplaySession
@@ -22,6 +26,7 @@ class ReplayController:
         self.session = session
         self.steps = ReplayTraceLoader().get_steps(trace)
         self._navigation = ReplayNavigation(self.session, self.steps)
+        self._checkpoints = ReplayCheckpointManager(self.session)
 
     @classmethod
     def create(
@@ -82,3 +87,13 @@ class ReplayController:
     def jump_to_index(self, index: int) -> AgentStep:
         """Jump replay state to a zero-based step index."""
         return self._navigation.jump_to_index(index)
+
+    def create_checkpoint(
+        self, checkpoint_id: str, metadata: dict[str, object] | None = None
+    ) -> ReplayCheckpoint:
+        """Create a replay checkpoint at the current position."""
+        return self._checkpoints.create_checkpoint(checkpoint_id, metadata)
+
+    def restore_checkpoint(self, checkpoint_id: str) -> ReplayCheckpoint:
+        """Restore replay state from a checkpoint."""
+        return self._checkpoints.restore_checkpoint(checkpoint_id)
