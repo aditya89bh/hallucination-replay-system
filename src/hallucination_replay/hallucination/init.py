@@ -18,11 +18,17 @@ from hallucination_replay.hallucination.normalization import (
     normalize_evidence_records,
     normalize_text,
 )
+from hallucination_replay.hallucination.unsupported import (
+    UnsupportedClaimFinding,
+    detect_unsupported_claims,
+)
 
 __all__ = [
     "Claim",
     "Evidence",
     "EvidenceMatch",
+    "UnsupportedClaimFinding",
+    "detect_unsupported_claims",
     "extract_claims_from_outputs",
     "extract_claims_from_text",
     "extract_evidence",
