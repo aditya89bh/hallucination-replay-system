@@ -18,6 +18,12 @@ from hallucination_replay.replay.navigation import ReplayNavigation
 from hallucination_replay.replay.session import ReplaySession
 from hallucination_replay.replay.snapshots import ReplaySnapshot, create_replay_snapshot
 from hallucination_replay.replay.state_manager import ReplayState, ReplayStateManager
+from hallucination_replay.replay.timeline import (
+    ReplayTimeline,
+    TimelineExport,
+    TimelineItem,
+    TimelineSummary,
+)
 
 __all__ = [
     "CheckpointCreated",
@@ -31,10 +37,14 @@ __all__ = [
     "ReplaySnapshot",
     "ReplayState",
     "ReplayStateManager",
+    "ReplayTimeline",
     "ReplayTraceLoader",
     "SnapshotCreated",
     "StepEntered",
     "StepExited",
+    "TimelineExport",
+    "TimelineItem",
+    "TimelineSummary",
     "create_replay_snapshot",
     "steps_to_metadata",
 ]
