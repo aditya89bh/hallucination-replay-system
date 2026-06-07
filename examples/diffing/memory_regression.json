@@ -5,8 +5,8 @@
       "memory": [
         {
           "event": {
+            "event_type": "write",
             "key": "account_tier",
-            "operation": "write",
             "timestamp": "2026-01-01T00:00:01Z",
             "value": "enterprise"
           },
@@ -53,8 +53,8 @@
       "memory": [
         {
           "event": {
+            "event_type": "write",
             "key": "account_tier",
-            "operation": "write",
             "timestamp": "2026-01-01T00:00:01Z",
             "value": "free"
           },

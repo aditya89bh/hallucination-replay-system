@@ -109,7 +109,7 @@ def _memory_record(key: str, value: str) -> dict[str, object]:
     return {
         "step_index": 1,
         "event": {
-            "operation": "write",
+            "event_type": "write",
             "key": key,
             "value": value,
             "timestamp": "2026-01-01T00:00:01Z",
