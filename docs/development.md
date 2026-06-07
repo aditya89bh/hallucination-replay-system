@@ -56,8 +56,10 @@ pytest --cov
 pytest --cov --cov-report=html
 ```
 
-The terminal report shows line and branch coverage by package. The optional HTML
-report is written to `htmlcov/` for local inspection and is not committed.
+The terminal report shows line and branch coverage by package. Coverage is
+configured with a 90% minimum quality gate; CI runs `pytest --cov` and fails if
+coverage drops below that threshold. The optional HTML report is written to
+`htmlcov/` for local inspection and is not committed.
 
 Tests live in `tests/` and should be added with every behavior change.
 
