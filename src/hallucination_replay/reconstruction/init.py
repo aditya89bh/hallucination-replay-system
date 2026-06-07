@@ -31,6 +31,10 @@ from hallucination_replay.reconstruction.retrieval import (
     RetrievalRecord,
     reconstruct_retrieval,
 )
+from hallucination_replay.reconstruction.state import (
+    ReconstructedState,
+    reconstruct_state,
+)
 from hallucination_replay.reconstruction.tools import (
     ReconstructedTools,
     ToolRecord,
@@ -56,6 +60,7 @@ __all__ = [
     "ReconstructedPrompt",
     "ReconstructedReasoning",
     "ReconstructedRetrieval",
+    "ReconstructedState",
     "ReconstructedTools",
     "ReconstructedValidation",
     "RetrievalRecord",
@@ -68,6 +73,7 @@ __all__ = [
     "reconstruct_prompt",
     "reconstruct_reasoning",
     "reconstruct_retrieval",
+    "reconstruct_state",
     "reconstruct_tools",
     "reconstruct_validation",
 ]
