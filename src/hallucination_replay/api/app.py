@@ -7,16 +7,26 @@ from typing import Final
 
 from fastapi import FastAPI
 
+from hallucination_replay.api.traces import (
+    default_trace_repository,
+)
+from hallucination_replay.api.traces import (
+    router as traces_router,
+)
+from hallucination_replay.storage import TraceRepository
+
 PACKAGE_NAME: Final = "hallucination-replay-system"
 
 
-def create_app() -> FastAPI:
+def create_app(repository: TraceRepository | None = None) -> FastAPI:
     """Create the Hallucination Replay API application."""
     app = FastAPI(
         title="Hallucination Replay System",
         version=_package_version(),
         description="Interactive debugging APIs for replaying and analyzing traces.",
     )
+    app.state.trace_repository = repository or default_trace_repository()
+    app.include_router(traces_router)
 
     @app.get("/health", tags=["system"])
     def health() -> dict[str, str]:
