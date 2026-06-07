@@ -22,7 +22,7 @@ def retrieval_regression_runs() -> tuple[RunTrace, RunTrace]:
     run_b = _base_trace(
         "retrieval-regression", "failed", "Evidence missing", success=True
     )
-    run_a.metadata["retrieval"] = [
+    run_a.metadata["retrievals"] = [
         {
             "step_index": 1,
             "event": {
@@ -30,17 +30,19 @@ def retrieval_regression_runs() -> tuple[RunTrace, RunTrace]:
                 "retrieved_documents": [
                     {"id": "policy-doc", "text": "Refunds close in 30 days."}
                 ],
-                "timestamp": "2026-01-01T00:00:01Z",
+                "retrieval_time_ms": 5,
+                "source": "knowledge-base",
             },
         }
     ]
-    run_b.metadata["retrieval"] = [
+    run_b.metadata["retrievals"] = [
         {
             "step_index": 1,
             "event": {
                 "query": "refund policy",
                 "retrieved_documents": [],
-                "timestamp": "2026-01-01T00:00:01Z",
+                "retrieval_time_ms": 5,
+                "source": "knowledge-base",
             },
         }
     ]

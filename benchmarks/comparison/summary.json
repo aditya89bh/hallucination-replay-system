@@ -7,9 +7,9 @@
   },
   "retrieval_regression": {
     "diff_sections": 8,
-    "json_report_bytes": 3111,
-    "markdown_report_lines": 106,
-    "total_change_count": 28
+    "json_report_bytes": 3567,
+    "markdown_report_lines": 111,
+    "total_change_count": 33
   },
   "successful_vs_failed": {
     "diff_sections": 8,

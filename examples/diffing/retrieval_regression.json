@@ -2,17 +2,18 @@
   "run_a": {
     "completed_at": null,
     "metadata": {
-      "retrieval": [
+      "retrievals": [
         {
           "event": {
             "query": "refund policy",
+            "retrieval_time_ms": 5,
             "retrieved_documents": [
               {
                 "id": "policy-doc",
                 "text": "Refunds close in 30 days."
               }
             ],
-            "timestamp": "2026-01-01T00:00:01Z"
+            "source": "knowledge-base"
           },
           "step_index": 1
         }
@@ -54,12 +55,13 @@
   "run_b": {
     "completed_at": null,
     "metadata": {
-      "retrieval": [
+      "retrievals": [
         {
           "event": {
             "query": "refund policy",
+            "retrieval_time_ms": 5,
             "retrieved_documents": [],
-            "timestamp": "2026-01-01T00:00:01Z"
+            "source": "knowledge-base"
           },
           "step_index": 1
         }
