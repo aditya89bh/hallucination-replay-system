@@ -7,7 +7,7 @@
     "outputs": [
       {
         "step_index": 2,
-        "content": "The shipment arrived in Mumbai on Tuesday."
+        "content": "The shipment arrived in Mumbai. It arrived on Tuesday."
       }
     ],
     "retrievals": [
@@ -22,6 +22,8 @@
     ],
     "tools": [],
     "memory": [],
-    "expected_hallucination": "partially_supported_claim"
+    "expected_hallucination": "partially_supported_claim",
+    "expected_support_coverage_min": 0.5,
+    "expected_support_coverage_max": 0.5
   }
 }

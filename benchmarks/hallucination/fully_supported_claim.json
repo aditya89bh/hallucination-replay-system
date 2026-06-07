@@ -22,6 +22,8 @@
     ],
     "tools": [],
     "memory": [],
-    "expected_hallucination": "fully_supported_claim"
+    "expected_hallucination": "fully_supported_claim",
+    "expected_support_coverage_min": 1.0,
+    "expected_support_coverage_max": 1.0
   }
 }

@@ -19,7 +19,13 @@ from hallucination_replay.hallucination.unsupported import detect_unsupported_cl
 from hallucination_replay.models import RunTrace
 from hallucination_replay.models.base import TraceModel
 
-POSITIVE_EXPECTATIONS = {"contradiction", "unsupported_claim"}
+POSITIVE_EXPECTATIONS = {
+    "contradiction",
+    "partially_supported_claim",
+    "unsupported_claim",
+}
+DEFAULT_MIN_SUPPORT_COVERAGE = 0.0
+DEFAULT_MAX_SUPPORT_COVERAGE = 1.0
 
 
 class HallucinationBenchmarkResult(TraceModel):
@@ -30,6 +36,9 @@ class HallucinationBenchmarkResult(TraceModel):
     detected_hallucination: bool
     detected_contradiction: bool
     support_coverage: float = Field(ge=0.0, le=1.0)
+    expected_min_support_coverage: float = Field(ge=0.0, le=1.0)
+    expected_max_support_coverage: float = Field(ge=0.0, le=1.0)
+    within_expected_support_threshold: bool
 
 
 class HallucinationEvaluationMetrics(TraceModel):
@@ -39,6 +48,7 @@ class HallucinationEvaluationMetrics(TraceModel):
     detection_rate: float = Field(ge=0.0, le=1.0)
     contradiction_rate: float = Field(ge=0.0, le=1.0)
     support_coverage: float = Field(ge=0.0, le=1.0)
+    threshold_pass_rate: float = Field(ge=0.0, le=1.0)
     results: list[HallucinationBenchmarkResult]
 
 
@@ -72,11 +82,16 @@ def evaluate_hallucination_traces(
         sum(result.support_coverage for result in results),
         len(results),
     )
+    threshold_pass_rate = _rate(
+        sum(1 for result in results if result.within_expected_support_threshold),
+        len(results),
+    )
     return HallucinationEvaluationMetrics(
         total_traces=len(results),
         detection_rate=detection_rate,
         contradiction_rate=contradiction_rate,
         support_coverage=support_coverage,
+        threshold_pass_rate=threshold_pass_rate,
         results=results,
     )
 
@@ -90,12 +105,19 @@ def _evaluate_trace(trace: RunTrace) -> HallucinationBenchmarkResult:
     unsupported = detect_unsupported_claims(matches)
     contradictions = detect_contradictions(claims, evidence)
     coverage = score_evidence_coverage(matches)
+    min_support_coverage = _threshold(trace, "expected_support_coverage_min")
+    max_support_coverage = _threshold(trace, "expected_support_coverage_max")
     return HallucinationBenchmarkResult(
         run_id=trace.run_id,
         expected=_expected(trace),
         detected_hallucination=bool(unsupported or contradictions),
         detected_contradiction=bool(contradictions),
         support_coverage=coverage.coverage_score,
+        expected_min_support_coverage=min_support_coverage,
+        expected_max_support_coverage=max_support_coverage,
+        within_expected_support_threshold=(
+            min_support_coverage <= coverage.coverage_score <= max_support_coverage
+        ),
     )
 
 
@@ -111,6 +133,18 @@ def _output_records(trace: RunTrace) -> list[dict[str, object]]:
 def _expected(trace: RunTrace) -> str:
     expected = trace.metadata.get("expected_hallucination", "unknown")
     return expected if isinstance(expected, str) else "unknown"
+
+
+def _threshold(trace: RunTrace, key: str) -> float:
+    value = trace.metadata.get(key)
+    if isinstance(value, int | float):
+        return max(
+            DEFAULT_MIN_SUPPORT_COVERAGE,
+            min(DEFAULT_MAX_SUPPORT_COVERAGE, float(value)),
+        )
+    if key.endswith("_min"):
+        return DEFAULT_MIN_SUPPORT_COVERAGE
+    return DEFAULT_MAX_SUPPORT_COVERAGE
 
 
 def _rate(numerator: float, denominator: int) -> float:

@@ -20,6 +20,8 @@
       }
     ],
     "memory": [],
-    "expected_hallucination": "contradiction"
+    "expected_hallucination": "contradiction",
+    "expected_support_coverage_min": 1.0,
+    "expected_support_coverage_max": 1.0
   }
 }

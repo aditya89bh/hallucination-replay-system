@@ -71,6 +71,18 @@ Interpret the results as detector behavior checks:
 - Contradictions should be found when claims conflict with tool or memory evidence.
 - Fully supported claims should keep severity low.
 - Coverage scores summarize how well extracted claims map to available evidence.
+- Each fixture declares `expected_support_coverage_min` and `expected_support_coverage_max` metadata so coverage thresholds are explicit and deterministic.
+
+Current support-coverage thresholds:
+
+| Fixture | Expected coverage | Purpose |
+| --- | --- | --- |
+| `unsupported_claim.json` | `0.0` | No captured evidence supports the claim. |
+| `contradiction.json` | `1.0` | The claim maps to evidence but conflicts with it. |
+| `partially_supported_claim.json` | `0.5` | One claim is supported and one timing claim is unsupported. |
+| `fully_supported_claim.json` | `1.0` | All extracted claims are supported by evidence. |
+
+The evaluation suite reports a threshold pass rate in addition to detection, contradiction, and aggregate coverage metrics.
 
 ## Comparison benchmarks
 
