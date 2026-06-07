@@ -7,6 +7,7 @@ from typing import Final
 
 from fastapi import FastAPI
 
+from hallucination_replay.api.reconstruction import router as reconstruction_router
 from hallucination_replay.api.replay import router as replay_router
 from hallucination_replay.api.traces import (
     default_trace_repository,
@@ -29,6 +30,7 @@ def create_app(repository: TraceRepository | None = None) -> FastAPI:
     app.state.trace_repository = repository or default_trace_repository()
     app.include_router(traces_router)
     app.include_router(replay_router)
+    app.include_router(reconstruction_router)
 
     @app.get("/health", tags=["system"])
     def health() -> dict[str, str]:
