@@ -9,6 +9,8 @@ from hallucination_replay.hallucination.evidence import Evidence, extract_eviden
 from hallucination_replay.hallucination.normalization import (
     normalize_claim,
     normalize_claims,
+    normalize_evidence,
+    normalize_evidence_records,
     normalize_text,
 )
 
@@ -20,5 +22,7 @@ __all__ = [
     "extract_evidence",
     "normalize_claim",
     "normalize_claims",
+    "normalize_evidence",
+    "normalize_evidence_records",
     "normalize_text",
 ]

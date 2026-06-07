@@ -6,6 +6,7 @@ import re
 import string
 
 from hallucination_replay.hallucination.claims import Claim
+from hallucination_replay.hallucination.evidence import Evidence
 
 _WHITESPACE_RE = re.compile(r"\s+")
 _TRANSLATION = str.maketrans("", "", string.punctuation)
@@ -26,3 +27,13 @@ def normalize_claim(claim: Claim) -> Claim:
 def normalize_claims(claims: list[Claim]) -> list[Claim]:
     """Normalize multiple claims."""
     return [normalize_claim(claim) for claim in claims]
+
+
+def normalize_evidence(evidence: Evidence) -> Evidence:
+    """Return a copy of evidence with normalized text."""
+    return evidence.model_copy(update={"text": normalize_text(evidence.text)})
+
+
+def normalize_evidence_records(evidence: list[Evidence]) -> list[Evidence]:
+    """Normalize multiple evidence records."""
+    return [normalize_evidence(item) for item in evidence]
