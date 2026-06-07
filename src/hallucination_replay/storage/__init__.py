@@ -15,6 +15,8 @@ from hallucination_replay.storage.init import (
     export_trace,
     export_traces,
     filter_traces,
+    import_trace,
+    import_traces,
 )
 
 __all__ = [
@@ -32,4 +34,6 @@ __all__ = [
     "export_trace",
     "export_traces",
     "filter_traces",
+    "import_trace",
+    "import_traces",
 ]

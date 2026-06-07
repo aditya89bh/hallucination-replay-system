@@ -7,6 +7,7 @@ from hallucination_replay.storage.compression import (
 from hallucination_replay.storage.export import export_trace, export_traces
 from hallucination_replay.storage.filesystem import FilesystemTraceRepository
 from hallucination_replay.storage.filters import TraceFilter, filter_traces
+from hallucination_replay.storage.importers import import_trace, import_traces
 from hallucination_replay.storage.index import TraceIndex, TraceIndexEntry
 from hallucination_replay.storage.json_store import JsonTraceStore
 from hallucination_replay.storage.lifecycle import TraceLifecycleManager
@@ -29,4 +30,6 @@ __all__ = [
     "export_trace",
     "export_traces",
     "filter_traces",
+    "import_trace",
+    "import_traces",
 ]
