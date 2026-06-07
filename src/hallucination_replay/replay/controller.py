@@ -13,6 +13,7 @@ from hallucination_replay.replay.loader import ReplayTraceLoader
 from hallucination_replay.replay.navigation import ReplayNavigation
 from hallucination_replay.replay.session import ReplaySession
 from hallucination_replay.replay.snapshots import ReplaySnapshot, create_replay_snapshot
+from hallucination_replay.replay.state_manager import ReplayStateManager
 
 
 class ReplayController:
@@ -28,6 +29,8 @@ class ReplayController:
         self.steps = ReplayTraceLoader().get_steps(trace)
         self._navigation = ReplayNavigation(self.session, self.steps)
         self._checkpoints = ReplayCheckpointManager(self.session)
+        self.state_manager = ReplayStateManager()
+        self._record_current_position()
 
     @classmethod
     def create(
@@ -67,7 +70,9 @@ class ReplayController:
 
     def move_forward(self) -> AgentStep | None:
         """Move replay state forward by one step."""
-        return self._navigation.move_forward()
+        step = self._navigation.move_forward()
+        self._record_current_position()
+        return step
 
     def has_previous(self) -> bool:
         """Return whether replay can move backward."""
@@ -79,15 +84,21 @@ class ReplayController:
 
     def move_backward(self) -> AgentStep | None:
         """Move replay state backward by one step."""
-        return self._navigation.move_backward()
+        step = self._navigation.move_backward()
+        self._record_current_position()
+        return step
 
     def jump_to_step(self, step_id: str) -> AgentStep:
         """Jump replay state to a step identifier."""
-        return self._navigation.jump_to_step(step_id)
+        step = self._navigation.jump_to_step(step_id)
+        self._record_current_position()
+        return step
 
     def jump_to_index(self, index: int) -> AgentStep:
         """Jump replay state to a zero-based step index."""
-        return self._navigation.jump_to_index(index)
+        step = self._navigation.jump_to_index(index)
+        self._record_current_position()
+        return step
 
     def create_checkpoint(
         self, checkpoint_id: str, metadata: dict[str, object] | None = None
@@ -97,7 +108,9 @@ class ReplayController:
 
     def restore_checkpoint(self, checkpoint_id: str) -> ReplayCheckpoint:
         """Restore replay state from a checkpoint."""
-        return self._checkpoints.restore_checkpoint(checkpoint_id)
+        checkpoint = self._checkpoints.restore_checkpoint(checkpoint_id)
+        self._record_current_position()
+        return checkpoint
 
     def create_snapshot(
         self, snapshot_id: str, metadata: dict[str, object] | None = None
@@ -105,4 +118,10 @@ class ReplayController:
         """Create a serializable snapshot of the current replay state."""
         return create_replay_snapshot(
             self.session, self.current_step(), snapshot_id, metadata
+        )
+
+    def _record_current_position(self) -> None:
+        """Record the current replay position in state manager."""
+        self.state_manager.record_position(
+            self.session.current_position, self.current_step()
         )

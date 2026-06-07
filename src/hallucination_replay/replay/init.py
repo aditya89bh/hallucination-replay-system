@@ -9,6 +9,7 @@ from hallucination_replay.replay.loader import ReplayTraceLoader, steps_to_metad
 from hallucination_replay.replay.navigation import ReplayNavigation
 from hallucination_replay.replay.session import ReplaySession
 from hallucination_replay.replay.snapshots import ReplaySnapshot, create_replay_snapshot
+from hallucination_replay.replay.state_manager import ReplayState, ReplayStateManager
 
 __all__ = [
     "ReplayCheckpoint",
@@ -17,6 +18,8 @@ __all__ = [
     "ReplayNavigation",
     "ReplaySession",
     "ReplaySnapshot",
+    "ReplayState",
+    "ReplayStateManager",
     "ReplayTraceLoader",
     "create_replay_snapshot",
     "steps_to_metadata",
