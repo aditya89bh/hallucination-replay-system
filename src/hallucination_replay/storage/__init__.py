@@ -3,17 +3,21 @@
 from hallucination_replay.storage.init import (
     FilesystemTraceRepository,
     JsonTraceStore,
+    TraceFilter,
     TraceIndex,
     TraceIndexEntry,
     TraceRepository,
     TraceSearch,
+    filter_traces,
 )
 
 __all__ = [
     "FilesystemTraceRepository",
     "JsonTraceStore",
+    "TraceFilter",
     "TraceIndex",
     "TraceIndexEntry",
     "TraceRepository",
     "TraceSearch",
+    "filter_traces",
 ]
