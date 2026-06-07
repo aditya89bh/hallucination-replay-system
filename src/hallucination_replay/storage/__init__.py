@@ -1,5 +1,5 @@
 """Trace storage package."""
 
-from hallucination_replay.storage.init import TraceRepository
+from hallucination_replay.storage.init import FilesystemTraceRepository, TraceRepository
 
-__all__ = ["TraceRepository"]
+__all__ = ["FilesystemTraceRepository", "TraceRepository"]
