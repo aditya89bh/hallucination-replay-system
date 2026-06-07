@@ -52,6 +52,7 @@ from hallucination_replay.reconstruction.validation import (
     ValidationRecord,
     reconstruct_validation,
 )
+from hallucination_replay.reconstruction.visualizer import visualize_state
 
 __all__ = [
     "ConfidencePoint",
@@ -86,4 +87,5 @@ __all__ = [
     "reconstruct_state",
     "reconstruct_tools",
     "reconstruct_validation",
+    "visualize_state",
 ]
