@@ -15,6 +15,12 @@ from hallucination_replay.reconstruction.prompt import (
     ReconstructedPrompt,
     reconstruct_prompt,
 )
+from hallucination_replay.reconstruction.reasoning import (
+    ConfidencePoint,
+    ReasoningRecord,
+    ReconstructedReasoning,
+    reconstruct_reasoning,
+)
 from hallucination_replay.reconstruction.retrieval import (
     ReconstructedRetrieval,
     RetrievalRecord,
@@ -33,12 +39,15 @@ from hallucination_replay.reconstruction.validation import (
 )
 
 __all__ = [
+    "ConfidencePoint",
     "ContextEntry",
     "MemoryRecord",
     "PromptState",
+    "ReasoningRecord",
     "ReconstructedContext",
     "ReconstructedMemory",
     "ReconstructedPrompt",
+    "ReconstructedReasoning",
     "ReconstructedRetrieval",
     "ReconstructedTools",
     "ReconstructedValidation",
@@ -49,6 +58,7 @@ __all__ = [
     "reconstruct_context",
     "reconstruct_memory",
     "reconstruct_prompt",
+    "reconstruct_reasoning",
     "reconstruct_retrieval",
     "reconstruct_tools",
     "reconstruct_validation",
