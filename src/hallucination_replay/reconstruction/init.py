@@ -5,6 +5,11 @@ from hallucination_replay.reconstruction.context import (
     ReconstructedContext,
     reconstruct_context,
 )
+from hallucination_replay.reconstruction.memory import (
+    MemoryRecord,
+    ReconstructedMemory,
+    reconstruct_memory,
+)
 from hallucination_replay.reconstruction.prompt import (
     PromptState,
     ReconstructedPrompt,
@@ -18,12 +23,15 @@ from hallucination_replay.reconstruction.retrieval import (
 
 __all__ = [
     "ContextEntry",
+    "MemoryRecord",
     "PromptState",
     "ReconstructedContext",
+    "ReconstructedMemory",
     "ReconstructedPrompt",
     "ReconstructedRetrieval",
     "RetrievalRecord",
     "reconstruct_context",
+    "reconstruct_memory",
     "reconstruct_prompt",
     "reconstruct_retrieval",
 ]
