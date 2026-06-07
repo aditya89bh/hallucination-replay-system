@@ -62,3 +62,15 @@ class ReplayController:
     def move_forward(self) -> AgentStep | None:
         """Move replay state forward by one step."""
         return self._navigation.move_forward()
+
+    def has_previous(self) -> bool:
+        """Return whether replay can move backward."""
+        return self._navigation.has_previous()
+
+    def previous_step(self) -> AgentStep | None:
+        """Return the previous step without moving replay state."""
+        return self._navigation.previous_step()
+
+    def move_backward(self) -> AgentStep | None:
+        """Move replay state backward by one step."""
+        return self._navigation.move_backward()

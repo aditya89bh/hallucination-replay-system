@@ -33,3 +33,21 @@ class ReplayNavigation:
         if not self._steps:
             return None
         return self._steps[self._session.current_position]
+
+    def has_previous(self) -> bool:
+        """Return whether a step exists before the current position."""
+        return bool(self._steps) and self._session.current_position > 0
+
+    def previous_step(self) -> AgentStep | None:
+        """Return the previous step without moving the session."""
+        if not self.has_previous():
+            return None
+        return self._steps[self._session.current_position - 1]
+
+    def move_backward(self) -> AgentStep | None:
+        """Move to the previous step, stopping at the first step."""
+        if self.has_previous():
+            self._session.current_position -= 1
+        if not self._steps:
+            return None
+        return self._steps[self._session.current_position]
