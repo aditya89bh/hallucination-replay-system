@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from hallucination_replay.exceptions import StorageError
 from hallucination_replay.models import RunTrace
 from hallucination_replay.storage import FilesystemTraceRepository
 
@@ -61,5 +62,5 @@ def test_filesystem_repository_lists_and_deletes_traces(tmp_path: Path) -> None:
 def test_filesystem_repository_rejects_path_traversal_run_id(tmp_path: Path) -> None:
     repository = FilesystemTraceRepository(tmp_path)
 
-    with pytest.raises(ValueError, match="Invalid run_id"):
+    with pytest.raises(StorageError, match="Invalid run_id"):
         repository.save_trace(make_trace("../unsafe"))
