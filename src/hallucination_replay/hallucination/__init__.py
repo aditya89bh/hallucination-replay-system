@@ -9,6 +9,10 @@ from hallucination_replay.hallucination.contradictions import (
     ContradictionFinding,
     detect_contradictions,
 )
+from hallucination_replay.hallucination.coverage import (
+    EvidenceCoverageScore,
+    score_evidence_coverage,
+)
 from hallucination_replay.hallucination.evidence import Evidence, extract_evidence
 from hallucination_replay.hallucination.matching import (
     EvidenceMatch,
@@ -31,6 +35,7 @@ __all__ = [
     "Claim",
     "ContradictionFinding",
     "Evidence",
+    "EvidenceCoverageScore",
     "EvidenceMatch",
     "UnsupportedClaimFinding",
     "detect_contradictions",
@@ -45,4 +50,5 @@ __all__ = [
     "normalize_evidence",
     "normalize_evidence_records",
     "normalize_text",
+    "score_evidence_coverage",
 ]
