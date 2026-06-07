@@ -12,6 +12,7 @@ from hallucination_replay.replay.checkpoints import (
 from hallucination_replay.replay.loader import ReplayTraceLoader
 from hallucination_replay.replay.navigation import ReplayNavigation
 from hallucination_replay.replay.session import ReplaySession
+from hallucination_replay.replay.snapshots import ReplaySnapshot, create_replay_snapshot
 
 
 class ReplayController:
@@ -97,3 +98,11 @@ class ReplayController:
     def restore_checkpoint(self, checkpoint_id: str) -> ReplayCheckpoint:
         """Restore replay state from a checkpoint."""
         return self._checkpoints.restore_checkpoint(checkpoint_id)
+
+    def create_snapshot(
+        self, snapshot_id: str, metadata: dict[str, object] | None = None
+    ) -> ReplaySnapshot:
+        """Create a serializable snapshot of the current replay state."""
+        return create_replay_snapshot(
+            self.session, self.current_step(), snapshot_id, metadata
+        )

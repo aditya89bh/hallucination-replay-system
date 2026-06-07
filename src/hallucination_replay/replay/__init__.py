@@ -6,7 +6,9 @@ from hallucination_replay.replay.init import (
     ReplayController,
     ReplayNavigation,
     ReplaySession,
+    ReplaySnapshot,
     ReplayTraceLoader,
+    create_replay_snapshot,
     steps_to_metadata,
 )
 
@@ -16,6 +18,8 @@ __all__ = [
     "ReplayController",
     "ReplayNavigation",
     "ReplaySession",
+    "ReplaySnapshot",
     "ReplayTraceLoader",
+    "create_replay_snapshot",
     "steps_to_metadata",
 ]
