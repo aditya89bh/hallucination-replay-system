@@ -1,0 +1,76 @@
+{
+  "run_a": {
+    "completed_at": null,
+    "metadata": {
+      "steps": [
+        {
+          "description": "Search succeeded",
+          "step_id": "s1",
+          "step_index": 1,
+          "step_type": "tool",
+          "timestamp": "2026-01-01T00:00:01Z"
+        }
+      ],
+      "tools": [
+        {
+          "call": {
+            "arguments": {
+              "query": "policy"
+            },
+            "invocation_time": "2026-01-01T00:00:01Z",
+            "step_id": "tool-1",
+            "tool_name": "search"
+          },
+          "result": {
+            "execution_time_ms": 5,
+            "output": "ok",
+            "step_id": "tool-1",
+            "success": true,
+            "tool_name": "search"
+          },
+          "step_index": 1
+        }
+      ]
+    },
+    "run_id": "successful-run",
+    "started_at": "2026-01-01T00:00:00Z",
+    "status": "completed"
+  },
+  "run_b": {
+    "completed_at": null,
+    "metadata": {
+      "steps": [
+        {
+          "description": "Search timed out",
+          "step_id": "s1",
+          "step_index": 1,
+          "step_type": "tool",
+          "timestamp": "2026-01-01T00:00:01Z"
+        }
+      ],
+      "tools": [
+        {
+          "call": {
+            "arguments": {
+              "query": "policy"
+            },
+            "invocation_time": "2026-01-01T00:00:01Z",
+            "step_id": "tool-1",
+            "tool_name": "search"
+          },
+          "result": {
+            "execution_time_ms": 5,
+            "output": "timeout",
+            "step_id": "tool-1",
+            "success": false,
+            "tool_name": "search"
+          },
+          "step_index": 1
+        }
+      ]
+    },
+    "run_id": "failed-run",
+    "started_at": "2026-01-01T00:00:00Z",
+    "status": "failed"
+  }
+}

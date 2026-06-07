@@ -9,6 +9,11 @@ from hallucination_replay.diffing.context import (
     ContextSnapshot,
     diff_context_state,
 )
+from hallucination_replay.diffing.examples import (
+    memory_regression_runs,
+    retrieval_regression_runs,
+    successful_vs_failed_runs,
+)
 from hallucination_replay.diffing.memory import MemoryDiff, diff_memory_state
 from hallucination_replay.diffing.reasoning import ReasoningDiff, diff_reasoning_state
 from hallucination_replay.diffing.reports import (
@@ -48,4 +53,7 @@ __all__ = [
     "diff_traces",
     "generate_comparison_json_report",
     "generate_comparison_markdown_report",
+    "memory_regression_runs",
+    "retrieval_regression_runs",
+    "successful_vs_failed_runs",
 ]

@@ -23,6 +23,9 @@ from hallucination_replay.diffing.init import (
     diff_traces,
     generate_comparison_json_report,
     generate_comparison_markdown_report,
+    memory_regression_runs,
+    retrieval_regression_runs,
+    successful_vs_failed_runs,
 )
 
 __all__ = [
@@ -48,4 +51,7 @@ __all__ = [
     "diff_traces",
     "generate_comparison_json_report",
     "generate_comparison_markdown_report",
+    "memory_regression_runs",
+    "retrieval_regression_runs",
+    "successful_vs_failed_runs",
 ]
