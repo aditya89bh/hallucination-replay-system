@@ -4,15 +4,34 @@ The hallucination replay system is designed as an observability and debugging pa
 
 ## System Overview
 
-```text
-Agent runtime
-    |
-    v
-Trace recorder -> Trace storage -> Replay engine -> Failure analysis -> Report output
-                         |              |
-                         v              v
-                 State reconstruction   Validation hooks
+The release-candidate architecture is centered on deterministic trace data.
+Captured traces flow through storage, replay, reconstruction, failure analysis,
+hallucination detection, comparison, API, and dashboard layers.
+
+```mermaid
+flowchart LR
+    Runtime[Agent runtime] --> Recorder[Trace recorder]
+    Recorder --> Storage[Trace repository]
+    Storage --> Replay[Replay engine]
+    Storage --> Reconstruction[State reconstruction]
+    Replay --> Timeline[Timeline and snapshots]
+    Reconstruction --> Analysis[Failure analysis]
+    Reconstruction --> Hallucination[Hallucination detection]
+    Storage --> Diffing[Execution comparison]
+    Analysis --> Reports[Markdown and JSON reports]
+    Hallucination --> Reports
+    Diffing --> Reports
+    Storage --> API[FastAPI platform]
+    Replay --> API
+    Reconstruction --> API
+    Analysis --> API
+    Hallucination --> API
+    Diffing --> API
+    API --> Dashboard[Lightweight dashboard]
 ```
+
+The source Mermaid diagram is also available at
+[`docs/assets/architecture.mmd`](assets/architecture.mmd).
 
 ## Trace Recording
 

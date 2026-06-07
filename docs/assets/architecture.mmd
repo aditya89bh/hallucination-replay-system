@@ -1,0 +1,24 @@
+flowchart LR
+    Runtime[Agent runtime] --> Recorder[Trace recorder]
+    Recorder --> Storage[Trace repository]
+    Storage --> Replay[Replay engine]
+    Storage --> Reconstruction[State reconstruction]
+    Replay --> Timeline[Timeline and snapshots]
+    Reconstruction --> Analysis[Failure analysis]
+    Reconstruction --> Hallucination[Hallucination detection]
+    Storage --> Diffing[Execution comparison]
+    Analysis --> Reports[Markdown and JSON reports]
+    Hallucination --> Reports
+    Diffing --> Reports
+    Storage --> API[FastAPI platform]
+    Replay --> API
+    Reconstruction --> API
+    Analysis --> API
+    Hallucination --> API
+    Diffing --> API
+    API --> Dashboard[Lightweight dashboard]
+
+    classDef core fill:#eef6ff,stroke:#2f6db3,color:#17324d;
+    classDef output fill:#f5f5f5,stroke:#777,color:#222;
+    class Storage,Replay,Reconstruction,Analysis,Hallucination,Diffing,API core;
+    class Timeline,Reports,Dashboard output;
