@@ -10,6 +10,12 @@ from hallucination_replay.reconstruction.conversation import (
     ReconstructedConversation,
     reconstruct_conversation,
 )
+from hallucination_replay.reconstruction.diff import (
+    ReconstructionDiff,
+    SectionDiff,
+    diff_replay_positions,
+    diff_states,
+)
 from hallucination_replay.reconstruction.memory import (
     MemoryRecord,
     ReconstructedMemory,
@@ -63,10 +69,14 @@ __all__ = [
     "ReconstructedState",
     "ReconstructedTools",
     "ReconstructedValidation",
+    "ReconstructionDiff",
     "RetrievalRecord",
+    "SectionDiff",
     "ToolRecord",
     "ToolTimelineItem",
     "ValidationRecord",
+    "diff_replay_positions",
+    "diff_states",
     "reconstruct_context",
     "reconstruct_conversation",
     "reconstruct_memory",
