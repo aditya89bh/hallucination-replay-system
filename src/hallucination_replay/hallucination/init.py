@@ -30,6 +30,10 @@ from hallucination_replay.hallucination.scoring import (
     HallucinationScore,
     score_hallucinations,
 )
+from hallucination_replay.hallucination.severity import (
+    HallucinationSeverity,
+    rank_hallucination_severity,
+)
 from hallucination_replay.hallucination.unsupported import (
     UnsupportedClaimFinding,
     detect_unsupported_claims,
@@ -42,6 +46,7 @@ __all__ = [
     "EvidenceCoverageScore",
     "EvidenceMatch",
     "HallucinationScore",
+    "HallucinationSeverity",
     "UnsupportedClaimFinding",
     "detect_contradictions",
     "detect_unsupported_claims",
@@ -55,6 +60,7 @@ __all__ = [
     "normalize_evidence",
     "normalize_evidence_records",
     "normalize_text",
+    "rank_hallucination_severity",
     "score_evidence_coverage",
     "score_hallucinations",
 ]
