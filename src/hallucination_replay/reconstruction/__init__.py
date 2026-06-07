@@ -1,4 +1,4 @@
-"""Agent state reconstruction package."""
+"""Public reconstruction exports."""
 
 from hallucination_replay.reconstruction.context import (
     ContextEntry,

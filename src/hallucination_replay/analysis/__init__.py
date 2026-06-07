@@ -1,4 +1,4 @@
-"""Failure analysis package."""
+"""Public analysis exports."""
 
 from hallucination_replay.analysis.confidence import (
     ConfidenceScore,

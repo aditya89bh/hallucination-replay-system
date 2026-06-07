@@ -1,5 +1,5 @@
-"""API package."""
+"""API package public exports."""
 
-from hallucination_replay.api.init import app, create_app
+from hallucination_replay.api.app import app, create_app
 
 __all__ = ["app", "create_app"]
