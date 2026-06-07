@@ -120,3 +120,12 @@ plugins = ["pydantic.mypy"]
 init_forbid_extra = true
 init_typed = true
 warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+]
+testpaths = ["tests"]
+pythonpath = ["src"]
