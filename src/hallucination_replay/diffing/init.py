@@ -1,5 +1,9 @@
 """Diffing package public exports."""
 
+from hallucination_replay.diffing.comparison import (
+    ExecutionComparison,
+    compare_executions,
+)
 from hallucination_replay.diffing.context import (
     ContextDiff,
     ContextSnapshot,
@@ -20,6 +24,7 @@ from hallucination_replay.diffing.traces import TraceDiff, diff_traces
 __all__ = [
     "ContextDiff",
     "ContextSnapshot",
+    "ExecutionComparison",
     "MemoryDiff",
     "ReasoningDiff",
     "RetrievalDiff",
@@ -28,6 +33,7 @@ __all__ = [
     "TimelineDiff",
     "ToolDiff",
     "TraceDiff",
+    "compare_executions",
     "diff_context_state",
     "diff_memory_state",
     "diff_reasoning_state",

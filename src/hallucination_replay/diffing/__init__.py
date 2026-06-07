@@ -3,6 +3,7 @@
 from hallucination_replay.diffing.init import (
     ContextDiff,
     ContextSnapshot,
+    ExecutionComparison,
     MemoryDiff,
     ReasoningDiff,
     RetrievalDiff,
@@ -11,6 +12,7 @@ from hallucination_replay.diffing.init import (
     TimelineDiff,
     ToolDiff,
     TraceDiff,
+    compare_executions,
     diff_context_state,
     diff_memory_state,
     diff_reasoning_state,
@@ -24,6 +26,7 @@ from hallucination_replay.diffing.init import (
 __all__ = [
     "ContextDiff",
     "ContextSnapshot",
+    "ExecutionComparison",
     "MemoryDiff",
     "ReasoningDiff",
     "RetrievalDiff",
@@ -32,6 +35,7 @@ __all__ = [
     "TimelineDiff",
     "ToolDiff",
     "TraceDiff",
+    "compare_executions",
     "diff_context_state",
     "diff_memory_state",
     "diff_reasoning_state",
