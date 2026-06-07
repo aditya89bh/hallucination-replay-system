@@ -1,5 +1,5 @@
 """Compatibility exports for dashboard modules."""
 
-from hallucination_replay.dashboard import DashboardService
+from hallucination_replay.dashboard import DashboardService, render_timeline_viewer
 
-__all__ = ["DashboardService"]
+__all__ = ["DashboardService", "render_timeline_viewer"]
