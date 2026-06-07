@@ -9,7 +9,7 @@ from pydantic import Field
 
 from hallucination_replay.models.base import TraceModel
 
-RunStatus = Literal["running", "completed", "failed"]
+RunStatus = Literal["running", "completed", "failed", "archived"]
 
 
 class RunTrace(TraceModel):
