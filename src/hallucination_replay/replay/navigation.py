@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from hallucination_replay.exceptions import ReplayError
 from hallucination_replay.models import AgentStep
 from hallucination_replay.replay.session import ReplaySession
 
@@ -51,3 +52,20 @@ class ReplayNavigation:
         if not self._steps:
             return None
         return self._steps[self._session.current_position]
+
+    def jump_to_step(self, step_id: str) -> AgentStep:
+        """Jump to a step by identifier."""
+        for index, step in enumerate(self._steps):
+            if step.step_id == step_id:
+                self._session.current_position = index
+                return step
+        message = f"Replay step not found: {step_id}"
+        raise ReplayError(message)
+
+    def jump_to_index(self, index: int) -> AgentStep:
+        """Jump to a step by zero-based replay index."""
+        if index < 0 or index >= len(self._steps):
+            message = f"Replay step index out of range: {index}"
+            raise ReplayError(message)
+        self._session.current_position = index
+        return self._steps[index]

@@ -74,3 +74,11 @@ class ReplayController:
     def move_backward(self) -> AgentStep | None:
         """Move replay state backward by one step."""
         return self._navigation.move_backward()
+
+    def jump_to_step(self, step_id: str) -> AgentStep:
+        """Jump replay state to a step identifier."""
+        return self._navigation.jump_to_step(step_id)
+
+    def jump_to_index(self, index: int) -> AgentStep:
+        """Jump replay state to a zero-based step index."""
+        return self._navigation.jump_to_index(index)
