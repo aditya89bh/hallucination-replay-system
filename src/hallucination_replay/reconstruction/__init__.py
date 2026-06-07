@@ -32,6 +32,11 @@ from hallucination_replay.reconstruction.reasoning import (
     ReconstructedReasoning,
     reconstruct_reasoning,
 )
+from hallucination_replay.reconstruction.reports import (
+    generate_json_report,
+    generate_markdown_report,
+    generate_state_summary_report,
+)
 from hallucination_replay.reconstruction.retrieval import (
     ReconstructedRetrieval,
     RetrievalRecord,
@@ -78,6 +83,9 @@ __all__ = [
     "ValidationRecord",
     "diff_replay_positions",
     "diff_states",
+    "generate_json_report",
+    "generate_markdown_report",
+    "generate_state_summary_report",
     "reconstruct_context",
     "reconstruct_conversation",
     "reconstruct_memory",
