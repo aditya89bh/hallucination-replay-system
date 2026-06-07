@@ -65,6 +65,31 @@ class TraceIndex(BaseModel):
         """Return indexed run identifiers."""
         return sorted(self.entries)
 
+    def count_by_status(self) -> dict[str, int]:
+        """Count indexed traces by status."""
+        counts: dict[str, int] = {}
+        for entry in self.entries.values():
+            counts[entry.status] = counts.get(entry.status, 0) + 1
+        return dict(sorted(counts.items()))
+
+    def count_by_agent_name(self) -> dict[str, int]:
+        """Count indexed traces by agent name."""
+        counts: dict[str, int] = {}
+        for entry in self.entries.values():
+            if entry.agent_name is not None:
+                counts[entry.agent_name] = counts.get(entry.agent_name, 0) + 1
+        return dict(sorted(counts.items()))
+
+    def list_unique_tags(self) -> list[str]:
+        """Return all unique tags in the index."""
+        return sorted({tag for entry in self.entries.values() for tag in entry.tags})
+
+    def list_unique_agents(self) -> list[str]:
+        """Return all unique agent names in the index."""
+        return sorted(
+            {entry.agent_name for entry in self.entries.values() if entry.agent_name}
+        )
+
     @staticmethod
     def _agent_name(trace: RunTrace) -> str | None:
         agent_name = trace.metadata.get("agent_name")
