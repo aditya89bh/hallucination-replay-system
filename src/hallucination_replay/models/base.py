@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Self
 
 from pydantic import BaseModel, ConfigDict
 
 
 class TraceModel(BaseModel):
-    """Base model with common serialization helpers."""
+    """Base model with common serialization and deserialization helpers."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -19,3 +19,13 @@ class TraceModel(BaseModel):
     def to_json(self) -> str:
         """Serialize the model to a JSON string."""
         return self.model_dump_json()
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any]) -> Self:
+        """Deserialize a model from a dictionary payload."""
+        return cls.model_validate(payload)
+
+    @classmethod
+    def from_json(cls, payload: str | bytes | bytearray) -> Self:
+        """Deserialize a model from a JSON payload."""
+        return cls.model_validate_json(payload)
