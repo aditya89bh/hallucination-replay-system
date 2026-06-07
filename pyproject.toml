@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hallucination-replay-system"
-version = "0.1.0"
+version = "1.0.0rc1"
 description = "Replay AI agent execution traces and analyze hallucination root causes."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -20,7 +20,7 @@ keywords = [
   "root-cause-analysis"
 ]
 classifiers = [
-  "Development Status :: 2 - Pre-Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",

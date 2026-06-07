@@ -4,7 +4,7 @@
 
 `hallucination-replay-system` helps engineers load agent traces, replay execution timelines, reconstruct state, analyze failures, detect hallucinations against available evidence, compare executions, and generate reproducible reports through Python APIs, FastAPI endpoints, and lightweight dashboard helpers.
 
-> Status: preparing a v1.0.0 release candidate. No v1.0.0 tag or GitHub release has been created yet.
+> Status: v1.0.0rc1 release-candidate prep. No v1.0.0 tag or GitHub release has been created yet.
 
 ## Why this exists
 
@@ -168,9 +168,9 @@ See [docs/production_readiness.md](docs/production_readiness.md) for operational
 
 ### v1.0.0 release candidate
 
-- Complete release documentation and repository presentation.
-- Add release workflow and validation script.
-- Confirm coverage, lint, typing, tests, build, and repository validation pass.
+- Release-candidate metadata is set to `1.0.0rc1`.
+- Release documentation, repository presentation, release workflow, and validation script are in place.
+- Final release-candidate checks should confirm coverage, lint, typing, tests, build, and repository validation pass.
 - Do not publish or tag until explicitly approved.
 
 ### Future work

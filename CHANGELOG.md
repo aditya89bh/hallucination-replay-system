@@ -6,15 +6,20 @@ The project follows a release-candidate style changelog while the public v1.0.0 
 
 ## Unreleased
 
-- Release hardening and presentation polish for the v1.0.0 release candidate.
+- No unreleased changes yet.
+
+## v1.0.0rc1 - 2026-06-07
+
+The v1.0.0 release candidate represents a complete deterministic debugging platform for AI agent traces.
+
+### Release hardening
+
 - Coverage reporting and a realistic coverage quality gate.
 - Benchmark, API, CLI, production readiness, demo, and contributor documentation.
 - Architecture diagram assets and repository validation tooling.
 - Release workflow for build, test, lint, type check, and artifact upload.
 
-## v1.0.0 planned
-
-The planned v1.0.0 release represents a complete deterministic debugging platform for AI agent traces.
+### Platform capabilities
 
 ### Foundation
 

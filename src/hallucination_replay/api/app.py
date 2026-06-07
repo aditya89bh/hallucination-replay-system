@@ -7,6 +7,7 @@ from typing import Final
 
 from fastapi import FastAPI
 
+from hallucination_replay import __version__
 from hallucination_replay.api.analysis import router as analysis_router
 from hallucination_replay.api.comparison import router as comparison_router
 from hallucination_replay.api.docs import API_DESCRIPTION, OPENAPI_TAGS
@@ -57,7 +58,7 @@ def _package_version() -> str:
     try:
         return version(PACKAGE_NAME)
     except PackageNotFoundError:
-        return "0.1.0"
+        return __version__
 
 
 app = create_app()
