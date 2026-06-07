@@ -1,80 +1,68 @@
 # Hallucination Replay System
 
-A production-oriented Python package for replaying AI agent execution traces and performing root-cause analysis of failures. Phase 1 establishes the professional repository foundation before replay functionality is implemented.
+**A deterministic debugging platform for AI agent failures.**
 
-## Project Vision
+`hallucination-replay-system` helps engineers load agent traces, replay execution timelines, reconstruct state, analyze failures, detect hallucinations against available evidence, compare executions, and generate reproducible reports through Python APIs, FastAPI endpoints, and lightweight dashboard helpers.
 
-AI agents need debuggers, not just logs. The Hallucination Replay System aims to make agent failures reproducible, inspectable, and explainable by replaying execution traces and reconstructing the state that shaped each model, retrieval, memory, tool, reasoning, and validation decision.
+> Status: preparing a v1.0.0 release candidate. No v1.0.0 tag or GitHub release has been created yet.
 
-## Problem Statement
+## Why this exists
 
-When an agent hallucinates or fails, teams often have scattered evidence: prompts in one place, retrieval logs in another, tool calls elsewhere, and validation results hidden in application code. This makes root-cause analysis slow and unreliable.
+AI agents need debuggers, not just logs. When an agent fails, evidence is usually scattered across prompts, model outputs, retrieval logs, memory events, tool calls, validation checks, and application code. That makes root-cause analysis slow, anecdotal, and hard to reproduce.
 
-This project is intended to answer questions such as:
+This project turns captured traces into deterministic debugging artifacts so teams can answer:
 
-- Did the model invent information not supported by retrieved context?
-- Did retrieval miss, rank, or truncate the right evidence?
-- Was memory stale, missing, corrupted, or contradictory?
+- What did the agent know at the failing step?
+- Was the answer supported by retrieval, memory, or tool evidence?
 - Did a tool fail, timeout, return malformed data, or get misread?
-- Did reasoning drift from the available evidence?
-- Did validation fail to detect or block the issue?
+- Was memory stale, missing, overwritten, or contradictory?
+- Did validation miss a failure?
+- What changed between a successful run and a failed run?
 
-## Architecture
+## Capability matrix
 
-```text
-+----------------+      +---------------+      +---------------+
-| Agent Runtime  | ---> | Trace Recorder| ---> | Trace Storage |
-+----------------+      +---------------+      +---------------+
-                                                     |
-                                                     v
-+----------------+      +----------------------+     +---------------+
-| Report Output  | <--- | Failure Analysis     | <-- | Replay Engine |
-+----------------+      +----------------------+     +---------------+
-                              ^                         |
-                              |                         v
-                      +----------------------+   +----------------------+
-                      | Validation Evidence  |   | State Reconstruction |
-                      +----------------------+   +----------------------+
+| Area | Capability | Status |
+| --- | --- | --- |
+| Trace models | Typed run, step, metadata, memory, retrieval, reasoning, validation, tool call, and tool result schemas | Ready |
+| Storage | Filesystem repository, JSON store, index, search, filters, retention, import/export, compression | Ready |
+| Replay | Deterministic loader, controller, timeline, navigation, snapshots, checkpoints, CLI | Ready |
+| Reconstruction | Context, conversation, prompt, memory, retrieval, tools, validation, reasoning summaries, full state | Ready |
+| Failure analysis | Intent, retrieval, memory, tool, validation, reasoning, output findings, confidence, root causes, reports | Ready |
+| Hallucination detection | Claim extraction, evidence matching, unsupported claims, contradictions, scoring, severity, benchmarks | Ready |
+| Comparison | Trace, state, context, retrieval, memory, tool, reasoning, timeline diffs and aggregate reports | Ready |
+| Platform API | FastAPI health, version, traces, replay, reconstruction, analysis, hallucination, comparison endpoints | Ready |
+| Dashboard | Lightweight deterministic HTML helpers for timeline, replay, failure, and hallucination views | Ready |
+| Release quality | Coverage gate, CI, release workflow, docs, benchmarks, validation script | In progress |
+
+## Architecture overview
+
+```mermaid
+flowchart LR
+    Runtime[Agent runtime] --> Recorder[Trace recorder]
+    Recorder --> Storage[Trace repository]
+    Storage --> Replay[Replay engine]
+    Storage --> Reconstruction[State reconstruction]
+    Replay --> Timeline[Timeline and snapshots]
+    Reconstruction --> Analysis[Failure analysis]
+    Reconstruction --> Hallucination[Hallucination detection]
+    Storage --> Diffing[Execution comparison]
+    Analysis --> Reports[Markdown and JSON reports]
+    Hallucination --> Reports
+    Diffing --> Reports
+    Storage --> API[FastAPI platform]
+    Replay --> API
+    Reconstruction --> API
+    Analysis --> API
+    Hallucination --> API
+    Diffing --> API
+    API --> Dashboard[Lightweight dashboard]
 ```
 
-Planned architectural layers:
+See [docs/architecture.md](docs/architecture.md) and [docs/assets/architecture.mmd](docs/assets/architecture.mmd) for the architecture guide and source diagram.
 
-- **Trace recording**: capture prompts, responses, retrievals, memories, tools, validation events, and runtime metadata.
-- **Replay engine**: play back trace timelines deterministically and support controlled inspection.
-- **State reconstruction**: rebuild agent-visible state at each decision point.
-- **Failure analysis**: classify hallucination, retrieval, memory, tool, reasoning, and validation failures with evidence.
-- **Reporting**: produce reproducible Markdown, JSON, HTML, notebook, or CI-ready artifacts.
-
-See [docs/architecture.md](docs/architecture.md) for more detail.
-
-## Roadmap
-
-### Phase 1: Repository foundation
-
-- Source-layout Python package
-- Packaging metadata and build system
-- Ruff, MyPy, Pytest, pre-commit, and CI
-- Versioning, logging, settings, and exception foundations
-- Architecture, development, and README documentation
-
-### Future phases
-
-- Trace schema and storage adapters
-- Replay timeline model
-- State reconstruction engine
-- Failure analyzers for retrieval, memory, tools, reasoning, and validation
-- Report generation
-- CLI and integration examples
-
-## Installation
+## Quickstart
 
 Python 3.11 or newer is required.
-
-```bash
-python -m pip install hallucination-replay-system
-```
-
-For local development from source:
 
 ```bash
 git clone https://github.com/aditya89bh/hallucination-replay-system.git
@@ -85,9 +73,117 @@ python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
 ```
 
+Run the quality gate:
+
+```bash
+pytest
+ruff check .
+mypy .
+```
+
+Generate coverage:
+
+```bash
+pytest --cov
+```
+
+## Demo workflow
+
+Use the included benchmark and example traces to explore the system.
+
+Run hallucination evaluation fixtures:
+
+```bash
+pytest tests/test_hallucination_evaluation.py tests/test_hallucination_integration.py
+```
+
+Run replay and storage benchmarks:
+
+```bash
+python benchmarks/storage_benchmark.py
+python benchmarks/replay_benchmark.py
+```
+
+Run comparison benchmarks:
+
+```bash
+python benchmarks/comparison/comparison_benchmark.py
+cat benchmarks/comparison/summary.json
+```
+
+Start the FastAPI platform with an ASGI server such as `uvicorn`:
+
+```bash
+uvicorn hallucination_replay.api:create_app --factory --reload
+```
+
+Upload a trace and run hallucination analysis:
+
+```bash
+curl -X POST http://localhost:8000/traces \
+  -H 'content-type: application/json' \
+  --data @benchmarks/hallucination/contradiction.json
+
+curl -X POST http://localhost:8000/hallucination/run \
+  -H 'content-type: application/json' \
+  -d '{"run_id":"hallucination-contradiction","step_index":3,"report_id":"demo"}'
+```
+
+See [docs/demo_guide.md](docs/demo_guide.md) for a complete walkthrough.
+
+## Benchmark summary
+
+Benchmarks are intentionally lightweight and local-first:
+
+- `benchmarks/storage_benchmark.py` measures filesystem repository save, load, list, and search timing.
+- `benchmarks/replay_benchmark.py` measures replay controller loading, navigation, snapshots, and timeline export.
+- `benchmarks/hallucination/*.json` provide deterministic unsupported-claim, contradiction, partial-support, and full-support fixtures.
+- `benchmarks/comparison/comparison_benchmark.py` generates deterministic comparison work-unit metrics.
+
+See [docs/benchmarks.md](docs/benchmarks.md) for commands and interpretation guidance.
+
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [API reference](docs/api_reference.md)
+- [OpenAPI usage](docs/openapi.md)
+- [CLI reference](docs/cli_reference.md)
+- [Benchmark guide](docs/benchmarks.md)
+- [Demo guide](docs/demo_guide.md)
+- [Trace schema](docs/trace_schema.md)
+- [Production readiness](docs/production_readiness.md)
+- [Development guide](docs/development.md)
+- [Contributing guide](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
+
+## Production readiness note
+
+The project is suitable for local, CI, and trusted internal debugging workflows over sanitized traces. It is not yet a hosted multi-tenant observability service. Authentication, authorization, database-backed report storage, distributed ingestion, and a rich browser UI are intentionally outside the current core release scope.
+
+Before using real production traces, redact secrets, customer data, private prompts, and sensitive tool outputs. The deterministic analysis engine does not call external LLMs.
+
+See [docs/production_readiness.md](docs/production_readiness.md) for operational guidance and known gaps.
+
+## Roadmap
+
+### v1.0.0 release candidate
+
+- Complete release documentation and repository presentation.
+- Add release workflow and validation script.
+- Confirm coverage, lint, typing, tests, build, and repository validation pass.
+- Do not publish or tag until explicitly approved.
+
+### Future work
+
+- Hosted ingestion and durable report storage.
+- Authentication and authorization for deployed APIs.
+- Rich browser dashboard and collaborative incident workflows.
+- Additional repository backends.
+- More benchmark suites and real-world sanitized trace examples.
+
 ## Development
 
-Run the standard quality gate before pushing changes:
+Standard local gate:
 
 ```bash
 pytest
@@ -96,15 +192,10 @@ mypy .
 python -m build
 ```
 
-Optional pre-commit setup:
+Coverage gate:
 
 ```bash
-pre-commit install
-pre-commit install --hook-type pre-push
+pytest --cov
 ```
 
-See [docs/development.md](docs/development.md) for the complete development workflow and release checklist.
-
-## Current Status
-
-This repository is intentionally limited to Phase 1 foundations. Replay functionality has not been implemented yet.
+See [docs/development.md](docs/development.md) for setup, release checks, and commit discipline.
