@@ -5,6 +5,10 @@ from hallucination_replay.hallucination.claims import (
     extract_claims_from_outputs,
     extract_claims_from_text,
 )
+from hallucination_replay.hallucination.contradictions import (
+    ContradictionFinding,
+    detect_contradictions,
+)
 from hallucination_replay.hallucination.evidence import Evidence, extract_evidence
 from hallucination_replay.hallucination.matching import (
     EvidenceMatch,
@@ -25,9 +29,11 @@ from hallucination_replay.hallucination.unsupported import (
 
 __all__ = [
     "Claim",
+    "ContradictionFinding",
     "Evidence",
     "EvidenceMatch",
     "UnsupportedClaimFinding",
+    "detect_contradictions",
     "detect_unsupported_claims",
     "extract_claims_from_outputs",
     "extract_claims_from_text",
