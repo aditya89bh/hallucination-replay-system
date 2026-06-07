@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 
 from hallucination_replay.models import AgentStep, RunTrace
 from hallucination_replay.replay.loader import ReplayTraceLoader
+from hallucination_replay.replay.navigation import ReplayNavigation
 from hallucination_replay.replay.session import ReplaySession
 
 
@@ -20,6 +21,7 @@ class ReplayController:
         self.trace = trace
         self.session = session
         self.steps = ReplayTraceLoader().get_steps(trace)
+        self._navigation = ReplayNavigation(self.session, self.steps)
 
     @classmethod
     def create(
@@ -48,3 +50,15 @@ class ReplayController:
         if not self.steps:
             return None
         return self.steps[self.session.current_position]
+
+    def has_next(self) -> bool:
+        """Return whether replay can move forward."""
+        return self._navigation.has_next()
+
+    def next_step(self) -> AgentStep | None:
+        """Return the next step without moving replay state."""
+        return self._navigation.next_step()
+
+    def move_forward(self) -> AgentStep | None:
+        """Move replay state forward by one step."""
+        return self._navigation.move_forward()
