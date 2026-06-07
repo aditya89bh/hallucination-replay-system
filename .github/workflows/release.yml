@@ -1,0 +1,54 @@
+name: Release Candidate Validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "src/**"
+      - "tests/**"
+      - "docs/**"
+      - ".github/workflows/release.yml"
+      - "CHANGELOG.md"
+      - "README.md"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-release:
+    name: Build, test, lint, and package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package and development dependencies
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run tests with coverage
+        run: pytest --cov
+
+      - name: Run Ruff
+        run: ruff check .
+
+      - name: Run MyPy
+        run: mypy .
+
+      - name: Build package
+        run: python -m build
+
+      - name: Upload distribution artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hallucination-replay-system-dist
+          path: dist/*
+          if-no-files-found: error
