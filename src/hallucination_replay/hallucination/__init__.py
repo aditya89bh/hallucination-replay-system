@@ -26,6 +26,10 @@ from hallucination_replay.hallucination.normalization import (
     normalize_evidence_records,
     normalize_text,
 )
+from hallucination_replay.hallucination.reports import (
+    generate_hallucination_json_report,
+    generate_hallucination_markdown_report,
+)
 from hallucination_replay.hallucination.scoring import (
     HallucinationScore,
     score_hallucinations,
@@ -53,6 +57,8 @@ __all__ = [
     "extract_claims_from_outputs",
     "extract_claims_from_text",
     "extract_evidence",
+    "generate_hallucination_json_report",
+    "generate_hallucination_markdown_report",
     "match_claim_to_evidence",
     "match_claims_to_evidence",
     "normalize_claim",
