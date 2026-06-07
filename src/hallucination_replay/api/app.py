@@ -9,6 +9,7 @@ from fastapi import FastAPI
 
 from hallucination_replay.api.analysis import router as analysis_router
 from hallucination_replay.api.comparison import router as comparison_router
+from hallucination_replay.api.docs import API_DESCRIPTION, OPENAPI_TAGS
 from hallucination_replay.api.hallucination import router as hallucination_router
 from hallucination_replay.api.reconstruction import router as reconstruction_router
 from hallucination_replay.api.replay import router as replay_router
@@ -28,7 +29,8 @@ def create_app(repository: TraceRepository | None = None) -> FastAPI:
     app = FastAPI(
         title="Hallucination Replay System",
         version=_package_version(),
-        description="Interactive debugging APIs for replaying and analyzing traces.",
+        description=API_DESCRIPTION,
+        openapi_tags=OPENAPI_TAGS,
     )
     app.state.trace_repository = repository or default_trace_repository()
     app.include_router(traces_router)
