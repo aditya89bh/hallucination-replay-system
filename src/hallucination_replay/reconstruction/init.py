@@ -5,6 +5,11 @@ from hallucination_replay.reconstruction.context import (
     ReconstructedContext,
     reconstruct_context,
 )
+from hallucination_replay.reconstruction.conversation import (
+    ConversationMessage,
+    ReconstructedConversation,
+    reconstruct_conversation,
+)
 from hallucination_replay.reconstruction.memory import (
     MemoryRecord,
     ReconstructedMemory,
@@ -41,10 +46,12 @@ from hallucination_replay.reconstruction.validation import (
 __all__ = [
     "ConfidencePoint",
     "ContextEntry",
+    "ConversationMessage",
     "MemoryRecord",
     "PromptState",
     "ReasoningRecord",
     "ReconstructedContext",
+    "ReconstructedConversation",
     "ReconstructedMemory",
     "ReconstructedPrompt",
     "ReconstructedReasoning",
@@ -56,6 +63,7 @@ __all__ = [
     "ToolTimelineItem",
     "ValidationRecord",
     "reconstruct_context",
+    "reconstruct_conversation",
     "reconstruct_memory",
     "reconstruct_prompt",
     "reconstruct_reasoning",
