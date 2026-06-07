@@ -13,6 +13,7 @@ from hallucination_replay.diffing.states import (
     StateValueChange,
     diff_reconstructed_states,
 )
+from hallucination_replay.diffing.timeline import TimelineDiff, diff_timelines
 from hallucination_replay.diffing.tools import ToolDiff, diff_tool_state
 from hallucination_replay.diffing.traces import TraceDiff, diff_traces
 
@@ -24,6 +25,7 @@ __all__ = [
     "RetrievalDiff",
     "StateDiff",
     "StateValueChange",
+    "TimelineDiff",
     "ToolDiff",
     "TraceDiff",
     "diff_context_state",
@@ -31,6 +33,7 @@ __all__ = [
     "diff_reasoning_state",
     "diff_reconstructed_states",
     "diff_retrieval_state",
+    "diff_timelines",
     "diff_tool_state",
     "diff_traces",
 ]

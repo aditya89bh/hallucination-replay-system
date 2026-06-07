@@ -8,6 +8,7 @@ from hallucination_replay.diffing.init import (
     RetrievalDiff,
     StateDiff,
     StateValueChange,
+    TimelineDiff,
     ToolDiff,
     TraceDiff,
     diff_context_state,
@@ -15,6 +16,7 @@ from hallucination_replay.diffing.init import (
     diff_reasoning_state,
     diff_reconstructed_states,
     diff_retrieval_state,
+    diff_timelines,
     diff_tool_state,
     diff_traces,
 )
@@ -27,6 +29,7 @@ __all__ = [
     "RetrievalDiff",
     "StateDiff",
     "StateValueChange",
+    "TimelineDiff",
     "ToolDiff",
     "TraceDiff",
     "diff_context_state",
@@ -34,6 +37,7 @@ __all__ = [
     "diff_reasoning_state",
     "diff_reconstructed_states",
     "diff_retrieval_state",
+    "diff_timelines",
     "diff_tool_state",
     "diff_traces",
 ]
