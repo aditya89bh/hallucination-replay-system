@@ -21,6 +21,7 @@ from hallucination_replay.diffing.init import (
     diff_timelines,
     diff_tool_state,
     diff_traces,
+    generate_comparison_markdown_report,
 )
 
 __all__ = [
@@ -44,4 +45,5 @@ __all__ = [
     "diff_timelines",
     "diff_tool_state",
     "diff_traces",
+    "generate_comparison_markdown_report",
 ]

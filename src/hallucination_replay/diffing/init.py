@@ -11,6 +11,7 @@ from hallucination_replay.diffing.context import (
 )
 from hallucination_replay.diffing.memory import MemoryDiff, diff_memory_state
 from hallucination_replay.diffing.reasoning import ReasoningDiff, diff_reasoning_state
+from hallucination_replay.diffing.reports import generate_comparison_markdown_report
 from hallucination_replay.diffing.retrieval import RetrievalDiff, diff_retrieval_state
 from hallucination_replay.diffing.states import (
     StateDiff,
@@ -42,4 +43,5 @@ __all__ = [
     "diff_timelines",
     "diff_tool_state",
     "diff_traces",
+    "generate_comparison_markdown_report",
 ]
