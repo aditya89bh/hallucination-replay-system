@@ -5,10 +5,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from hallucination_replay.models.base import TraceModel
 
 
-class ToolCall(BaseModel):
+class ToolCall(TraceModel):
     """A request made by an agent to an external or internal tool."""
 
     tool_name: str

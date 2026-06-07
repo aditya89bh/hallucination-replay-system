@@ -5,12 +5,14 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from hallucination_replay.models.base import TraceModel
 
 ReasoningType = Literal["planning", "reflection", "decision", "error_analysis"]
 
 
-class ReasoningEvent(BaseModel):
+class ReasoningEvent(TraceModel):
     """A concise reasoning summary without chain-of-thought content."""
 
     reasoning_type: ReasoningType

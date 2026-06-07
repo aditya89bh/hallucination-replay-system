@@ -5,12 +5,14 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from hallucination_replay.models.base import TraceModel
 
 RunStatus = Literal["running", "completed", "failed"]
 
 
-class RunTrace(BaseModel):
+class RunTrace(TraceModel):
     """Top-level execution trace for a single agent run."""
 
     run_id: str

@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from pydantic import BaseModel, Field, StrictBool
+from pydantic import Field, StrictBool
+
+from hallucination_replay.models.base import TraceModel
 
 
-class ValidationEvent(BaseModel):
+class ValidationEvent(TraceModel):
     """Result from a validation check over an agent step or trace."""
 
     validator_name: str

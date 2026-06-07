@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from hallucination_replay.models.base import TraceModel
 
 
-class RetrievalEvent(BaseModel):
+class RetrievalEvent(TraceModel):
     """Evidence retrieved for an agent step."""
 
     query: str

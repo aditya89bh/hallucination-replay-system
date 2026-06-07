@@ -4,12 +4,14 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from hallucination_replay.models.base import TraceModel
 
 TraceEnvironment = Literal["development", "test", "staging", "production"]
 
 
-class TraceMetadata(BaseModel):
+class TraceMetadata(TraceModel):
     """Descriptive metadata for an agent execution trace."""
 
     agent_name: str

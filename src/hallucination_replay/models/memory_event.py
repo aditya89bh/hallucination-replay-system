@@ -5,12 +5,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel
+from hallucination_replay.models.base import TraceModel
 
 MemoryEventType = Literal["read", "write"]
 
 
-class MemoryEvent(BaseModel):
+class MemoryEvent(TraceModel):
     """A memory read or write observed during an agent run."""
 
     event_type: MemoryEventType

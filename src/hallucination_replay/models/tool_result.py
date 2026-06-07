@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, Field, StrictBool
+from pydantic import Field, StrictBool
+
+from hallucination_replay.models.base import TraceModel
 
 
-class ToolResult(BaseModel):
+class ToolResult(TraceModel):
     """Result returned by a tool invocation."""
 
     tool_name: str
