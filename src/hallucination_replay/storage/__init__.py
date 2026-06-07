@@ -6,6 +6,7 @@ from hallucination_replay.storage.init import (
     TraceIndex,
     TraceIndexEntry,
     TraceRepository,
+    TraceSearch,
 )
 
 __all__ = [
@@ -14,4 +15,5 @@ __all__ = [
     "TraceIndex",
     "TraceIndexEntry",
     "TraceRepository",
+    "TraceSearch",
 ]
