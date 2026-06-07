@@ -17,6 +17,12 @@ from hallucination_replay.hallucination.coverage import (
     EvidenceCoverageScore,
     score_evidence_coverage,
 )
+from hallucination_replay.hallucination.evaluation import (
+    HallucinationBenchmarkResult,
+    HallucinationEvaluationMetrics,
+    evaluate_hallucination_benchmarks,
+    evaluate_hallucination_traces,
+)
 from hallucination_replay.hallucination.evidence import Evidence, extract_evidence
 from hallucination_replay.hallucination.matching import (
     EvidenceMatch,
@@ -54,11 +60,15 @@ __all__ = [
     "Evidence",
     "EvidenceCoverageScore",
     "EvidenceMatch",
+    "HallucinationBenchmarkResult",
+    "HallucinationEvaluationMetrics",
     "HallucinationScore",
     "HallucinationSeverity",
     "UnsupportedClaimFinding",
     "detect_contradictions",
     "detect_unsupported_claims",
+    "evaluate_hallucination_benchmarks",
+    "evaluate_hallucination_traces",
     "extract_claims_from_outputs",
     "extract_claims_from_text",
     "extract_evidence",
