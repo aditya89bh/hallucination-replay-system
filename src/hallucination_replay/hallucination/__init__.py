@@ -6,6 +6,11 @@ from hallucination_replay.hallucination.claims import (
     extract_claims_from_text,
 )
 from hallucination_replay.hallucination.evidence import Evidence, extract_evidence
+from hallucination_replay.hallucination.normalization import (
+    normalize_claim,
+    normalize_claims,
+    normalize_text,
+)
 
 __all__ = [
     "Claim",
@@ -13,4 +18,7 @@ __all__ = [
     "extract_claims_from_outputs",
     "extract_claims_from_text",
     "extract_evidence",
+    "normalize_claim",
+    "normalize_claims",
+    "normalize_text",
 ]
