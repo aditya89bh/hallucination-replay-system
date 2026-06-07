@@ -131,3 +131,18 @@ addopts = [
 ]
 testpaths = ["tests"]
 pythonpath = ["src"]
+[tool.coverage.run]
+branch = true
+source = ["hallucination_replay"]
+omit = [
+  "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+]
+

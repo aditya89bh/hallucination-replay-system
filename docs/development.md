@@ -49,7 +49,17 @@ Pytest is used for the test suite.
 pytest
 ```
 
-Tests live in `tests/` and should be added with every behavior change. Phase 1 contains only foundation tests; replay functionality belongs to later phases.
+Generate a local coverage report with pytest-cov:
+
+```bash
+pytest --cov
+pytest --cov --cov-report=html
+```
+
+The terminal report shows line and branch coverage by package. The optional HTML
+report is written to `htmlcov/` for local inspection and is not committed.
+
+Tests live in `tests/` and should be added with every behavior change.
 
 ## Build Verification
 
