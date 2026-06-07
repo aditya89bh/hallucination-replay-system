@@ -26,6 +26,11 @@ from hallucination_replay.reconstruction.tools import (
     ToolTimelineItem,
     reconstruct_tools,
 )
+from hallucination_replay.reconstruction.validation import (
+    ReconstructedValidation,
+    ValidationRecord,
+    reconstruct_validation,
+)
 
 __all__ = [
     "ContextEntry",
@@ -36,12 +41,15 @@ __all__ = [
     "ReconstructedPrompt",
     "ReconstructedRetrieval",
     "ReconstructedTools",
+    "ReconstructedValidation",
     "RetrievalRecord",
     "ToolRecord",
     "ToolTimelineItem",
+    "ValidationRecord",
     "reconstruct_context",
     "reconstruct_memory",
     "reconstruct_prompt",
     "reconstruct_retrieval",
     "reconstruct_tools",
+    "reconstruct_validation",
 ]
