@@ -1,14 +1,14 @@
 # Hallucination Replay System
 
-**A deterministic debugging platform for AI agent failures.**
+**Replay, reconstruct, analyze, and compare AI agent failures with deterministic evidence.**
 
-`hallucination-replay-system` helps engineers load agent traces, replay execution timelines, reconstruct state, analyze failures, detect hallucinations against available evidence, compare executions, and generate reproducible reports through Python APIs, FastAPI endpoints, and lightweight dashboard helpers.
+`hallucination-replay-system` is a Python debugging platform for AI agents. It loads structured execution traces, replays timelines, reconstructs agent-visible state, analyzes root causes, detects hallucinations against captured evidence, compares executions, and exposes the workflow through Python APIs, FastAPI endpoints, and lightweight dashboard helpers.
 
-> Status: v1.0.0rc1 release-candidate prep. No v1.0.0 tag or GitHub release has been created yet.
+> Status: v1.0.0 release-candidate ready. Current package version is `1.0.0rc1`; no `v1.0.0` tag or GitHub release has been created yet.
 
 ## Why this exists
 
-AI agents need debuggers, not just logs. When an agent fails, evidence is usually scattered across prompts, model outputs, retrieval logs, memory events, tool calls, validation checks, and application code. That makes root-cause analysis slow, anecdotal, and hard to reproduce.
+AI agents need debuggers, not just logs. When an agent fails, evidence is often scattered across prompts, model outputs, retrieval logs, memory events, tool calls, validation checks, and application code. That makes root-cause analysis slow, anecdotal, and hard to reproduce.
 
 This project turns captured traces into deterministic debugging artifacts so teams can answer:
 
@@ -28,11 +28,11 @@ This project turns captured traces into deterministic debugging artifacts so tea
 | Replay | Deterministic loader, controller, timeline, navigation, snapshots, checkpoints, CLI | Ready |
 | Reconstruction | Context, conversation, prompt, memory, retrieval, tools, validation, reasoning summaries, full state | Ready |
 | Failure analysis | Intent, retrieval, memory, tool, validation, reasoning, output findings, confidence, root causes, reports | Ready |
-| Hallucination detection | Claim extraction, evidence matching, unsupported claims, contradictions, scoring, severity, benchmarks | Ready |
+| Hallucination detection | Claim extraction, evidence matching, unsupported claims, contradictions, scoring, severity, benchmark thresholds | Ready |
 | Comparison | Trace, state, context, retrieval, memory, tool, reasoning, timeline diffs and aggregate reports | Ready |
 | Platform API | FastAPI health, version, traces, replay, reconstruction, analysis, hallucination, comparison endpoints | Ready |
 | Dashboard | Lightweight deterministic HTML helpers for timeline, replay, failure, and hallucination views | Ready |
-| Release quality | Coverage gate, CI, release workflow, docs, benchmarks, validation script | In progress |
+| Release quality | Coverage gate, CI, release workflow, artifact verification, docs, validation script | Ready |
 
 ## Architecture overview
 
@@ -58,7 +58,7 @@ flowchart LR
     API --> Dashboard[Lightweight dashboard]
 ```
 
-See [docs/architecture.md](docs/architecture.md) and [docs/assets/architecture.mmd](docs/assets/architecture.mmd) for the architecture guide and source diagram.
+The core loop is intentionally deterministic: capture trace data, replay it, reconstruct state at a step, run rule-based analysis, and produce reproducible reports. See [docs/architecture.md](docs/architecture.md) and [docs/assets/architecture.mmd](docs/assets/architecture.mmd) for the architecture guide and source diagram.
 
 ## Quickstart
 
@@ -73,7 +73,7 @@ python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
 ```
 
-Run the quality gate:
+Run the standard quality gate:
 
 ```bash
 pytest
@@ -81,10 +81,19 @@ ruff check .
 mypy .
 ```
 
-Generate coverage:
+Run coverage and repository validation:
 
 ```bash
 pytest --cov
+python scripts/validate_repo.py
+```
+
+Build and verify release artifacts:
+
+```bash
+rm -rf dist build *.egg-info
+python -m build
+python scripts/verify_release_artifacts.py --version 1.0.0rc1
 ```
 
 ## Demo workflow
@@ -129,7 +138,7 @@ curl -X POST http://localhost:8000/hallucination/run \
   -d '{"run_id":"hallucination-contradiction","step_index":3,"report_id":"demo"}'
 ```
 
-See [docs/demo_guide.md](docs/demo_guide.md) for a complete walkthrough.
+See [docs/demo_guide.md](docs/demo_guide.md), [docs/api_examples.md](docs/api_examples.md), and [docs/dashboard_guide.md](docs/dashboard_guide.md) for guided walkthroughs.
 
 ## Benchmark summary
 
@@ -137,7 +146,7 @@ Benchmarks are intentionally lightweight and local-first:
 
 - `benchmarks/storage_benchmark.py` measures filesystem repository save, load, list, and search timing.
 - `benchmarks/replay_benchmark.py` measures replay controller loading, navigation, snapshots, and timeline export.
-- `benchmarks/hallucination/*.json` provide deterministic unsupported-claim, contradiction, partial-support, and full-support fixtures.
+- `benchmarks/hallucination/*.json` provide deterministic unsupported-claim, contradiction, partial-support, and full-support fixtures with explicit support-coverage thresholds.
 - `benchmarks/comparison/comparison_benchmark.py` generates deterministic comparison work-unit metrics.
 
 See [docs/benchmarks.md](docs/benchmarks.md) for commands and interpretation guidance.
@@ -146,31 +155,38 @@ See [docs/benchmarks.md](docs/benchmarks.md) for commands and interpretation gui
 
 - [Architecture](docs/architecture.md)
 - [API reference](docs/api_reference.md)
+- [API usage examples](docs/api_examples.md)
 - [OpenAPI usage](docs/openapi.md)
 - [CLI reference](docs/cli_reference.md)
+- [Dashboard guide](docs/dashboard_guide.md)
 - [Benchmark guide](docs/benchmarks.md)
+- [Example trace catalog](docs/example_traces.md)
 - [Demo guide](docs/demo_guide.md)
 - [Trace schema](docs/trace_schema.md)
+- [Release artifact verification](docs/release_artifacts.md)
 - [Production readiness](docs/production_readiness.md)
+- [Limitations and non-goals](docs/limitations.md)
+- [Security and privacy](docs/security.md)
+- [Troubleshooting](docs/troubleshooting.md)
 - [Development guide](docs/development.md)
 - [Contributing guide](CONTRIBUTING.md)
 - [Changelog](CHANGELOG.md)
 
 ## Production readiness note
 
-The project is suitable for local, CI, and trusted internal debugging workflows over sanitized traces. It is not yet a hosted multi-tenant observability service. Authentication, authorization, database-backed report storage, distributed ingestion, and a rich browser UI are intentionally outside the current core release scope.
+The project is suitable for local, CI, and trusted internal debugging workflows over sanitized traces. It is not a hosted multi-tenant observability service. Authentication, authorization, database-backed report storage, distributed ingestion, and a rich browser UI are intentionally outside the current core release scope.
 
 Before using real production traces, redact secrets, customer data, private prompts, and sensitive tool outputs. The deterministic analysis engine does not call external LLMs.
 
-See [docs/production_readiness.md](docs/production_readiness.md) for operational guidance and known gaps.
+See [docs/production_readiness.md](docs/production_readiness.md), [docs/security.md](docs/security.md), and [docs/limitations.md](docs/limitations.md) for operational guidance and known gaps.
 
 ## Roadmap
 
 ### v1.0.0 release candidate
 
 - Release-candidate metadata is set to `1.0.0rc1`.
-- Release documentation, repository presentation, release workflow, and validation script are in place.
-- Final release-candidate checks should confirm coverage, lint, typing, tests, build, and repository validation pass.
+- Release documentation, repository presentation, release workflow, artifact verification, and validation script are in place.
+- Final release checks should confirm coverage, lint, typing, tests, build, artifact verification, and repository validation pass.
 - Do not publish or tag until explicitly approved.
 
 ### Future work
