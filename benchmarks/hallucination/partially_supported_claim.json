@@ -1,0 +1,27 @@
+{
+  "run_id": "hallucination-partially-supported-claim",
+  "started_at": "2026-01-01T00:02:00Z",
+  "completed_at": "2026-01-01T00:02:05Z",
+  "status": "completed",
+  "metadata": {
+    "outputs": [
+      {
+        "step_index": 2,
+        "content": "The shipment arrived in Mumbai on Tuesday."
+      }
+    ],
+    "retrievals": [
+      {
+        "step_index": 1,
+        "results": [
+          {
+            "text": "The shipment arrived in Mumbai."
+          }
+        ]
+      }
+    ],
+    "tools": [],
+    "memory": [],
+    "expected_hallucination": "partially_supported_claim"
+  }
+}

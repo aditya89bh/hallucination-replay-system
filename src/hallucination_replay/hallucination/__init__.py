@@ -1,5 +1,9 @@
 """Hallucination detection package."""
 
+from hallucination_replay.hallucination.benchmarks import (
+    DEFAULT_BENCHMARK_DIRECTORY,
+    load_hallucination_benchmark_traces,
+)
 from hallucination_replay.hallucination.claims import (
     Claim,
     extract_claims_from_outputs,
@@ -44,6 +48,7 @@ from hallucination_replay.hallucination.unsupported import (
 )
 
 __all__ = [
+    "DEFAULT_BENCHMARK_DIRECTORY",
     "Claim",
     "ContradictionFinding",
     "Evidence",
@@ -59,6 +64,7 @@ __all__ = [
     "extract_evidence",
     "generate_hallucination_json_report",
     "generate_hallucination_markdown_report",
+    "load_hallucination_benchmark_traces",
     "match_claim_to_evidence",
     "match_claims_to_evidence",
     "normalize_claim",

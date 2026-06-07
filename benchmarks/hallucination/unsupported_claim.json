@@ -1,0 +1,27 @@
+{
+  "run_id": "hallucination-unsupported-claim",
+  "started_at": "2026-01-01T00:00:00Z",
+  "completed_at": "2026-01-01T00:00:05Z",
+  "status": "completed",
+  "metadata": {
+    "outputs": [
+      {
+        "step_index": 2,
+        "content": "The payment was approved by the bank."
+      }
+    ],
+    "retrievals": [
+      {
+        "step_index": 1,
+        "results": [
+          {
+            "text": "The payment request is still pending review."
+          }
+        ]
+      }
+    ],
+    "tools": [],
+    "memory": [],
+    "expected_hallucination": "unsupported_claim"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "run_id": "hallucination-contradiction",
+  "started_at": "2026-01-01T00:01:00Z",
+  "completed_at": "2026-01-01T00:01:05Z",
+  "status": "completed",
+  "metadata": {
+    "outputs": [
+      {
+        "step_index": 3,
+        "content": "The account is not active."
+      }
+    ],
+    "retrievals": [],
+    "tools": [
+      {
+        "step_index": 2,
+        "result": {
+          "output": "The account is active."
+        }
+      }
+    ],
+    "memory": [],
+    "expected_hallucination": "contradiction"
+  }
+}

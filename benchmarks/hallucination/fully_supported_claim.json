@@ -1,0 +1,27 @@
+{
+  "run_id": "hallucination-fully-supported-claim",
+  "started_at": "2026-01-01T00:03:00Z",
+  "completed_at": "2026-01-01T00:03:05Z",
+  "status": "completed",
+  "metadata": {
+    "outputs": [
+      {
+        "step_index": 2,
+        "content": "Paris is in France."
+      }
+    ],
+    "retrievals": [
+      {
+        "step_index": 1,
+        "results": [
+          {
+            "text": "Paris is in France."
+          }
+        ]
+      }
+    ],
+    "tools": [],
+    "memory": [],
+    "expected_hallucination": "fully_supported_claim"
+  }
+}
