@@ -20,6 +20,12 @@ from hallucination_replay.reconstruction.retrieval import (
     RetrievalRecord,
     reconstruct_retrieval,
 )
+from hallucination_replay.reconstruction.tools import (
+    ReconstructedTools,
+    ToolRecord,
+    ToolTimelineItem,
+    reconstruct_tools,
+)
 
 __all__ = [
     "ContextEntry",
@@ -29,9 +35,13 @@ __all__ = [
     "ReconstructedMemory",
     "ReconstructedPrompt",
     "ReconstructedRetrieval",
+    "ReconstructedTools",
     "RetrievalRecord",
+    "ToolRecord",
+    "ToolTimelineItem",
     "reconstruct_context",
     "reconstruct_memory",
     "reconstruct_prompt",
     "reconstruct_retrieval",
+    "reconstruct_tools",
 ]
