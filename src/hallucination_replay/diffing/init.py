@@ -6,6 +6,7 @@ from hallucination_replay.diffing.context import (
     diff_context_state,
 )
 from hallucination_replay.diffing.memory import MemoryDiff, diff_memory_state
+from hallucination_replay.diffing.reasoning import ReasoningDiff, diff_reasoning_state
 from hallucination_replay.diffing.retrieval import RetrievalDiff, diff_retrieval_state
 from hallucination_replay.diffing.states import (
     StateDiff,
@@ -19,6 +20,7 @@ __all__ = [
     "ContextDiff",
     "ContextSnapshot",
     "MemoryDiff",
+    "ReasoningDiff",
     "RetrievalDiff",
     "StateDiff",
     "StateValueChange",
@@ -26,6 +28,7 @@ __all__ = [
     "TraceDiff",
     "diff_context_state",
     "diff_memory_state",
+    "diff_reasoning_state",
     "diff_reconstructed_states",
     "diff_retrieval_state",
     "diff_tool_state",
