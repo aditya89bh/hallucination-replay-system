@@ -15,6 +15,10 @@ from hallucination_replay.analysis.output import analyze_output_failures
 from hallucination_replay.analysis.ranking import RankedRootCause, rank_root_causes
 from hallucination_replay.analysis.reasoning import analyze_reasoning_failures
 from hallucination_replay.analysis.retrieval import analyze_retrieval_failures
+from hallucination_replay.analysis.summaries import (
+    generate_detailed_failure_summary,
+    generate_short_failure_summary,
+)
 from hallucination_replay.analysis.taxonomy import FailureFinding, FailureType
 from hallucination_replay.analysis.tools import analyze_tool_failures
 from hallucination_replay.analysis.validation import analyze_validation_failures
@@ -33,6 +37,8 @@ __all__ = [
     "analyze_retrieval_failures",
     "analyze_tool_failures",
     "analyze_validation_failures",
+    "generate_detailed_failure_summary",
+    "generate_short_failure_summary",
     "rank_root_causes",
     "score_finding_confidence",
     "score_findings",
