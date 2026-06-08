@@ -1,7 +1,15 @@
 from __future__ import annotations
 
-from scripts.validate_repo import REQUIRED_DOCS, REQUIRED_IMPORTS, validate_imports, validate_paths
-from scripts.verify_release_artifacts import REQUIRED_SDIST_MEMBERS, REQUIRED_WHEEL_MEMBERS
+from scripts.validate_repo import (
+    REQUIRED_DOCS,
+    REQUIRED_IMPORTS,
+    validate_imports,
+    validate_paths,
+)
+from scripts.verify_release_artifacts import (
+    REQUIRED_SDIST_MEMBERS,
+    REQUIRED_WHEEL_MEMBERS,
+)
 
 
 def test_release_validation_import_roots_are_complete() -> None:
