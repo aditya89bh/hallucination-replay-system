@@ -2,15 +2,13 @@
 
 All notable changes to `hallucination-replay-system` will be documented in this file.
 
-The project follows a release-candidate style changelog while the public v1.0.0 tag has not yet been created.
-
 ## Unreleased
 
 - No unreleased changes yet.
 
-## v1.0.0rc1 - 2026-06-07
+## v1.0.0 - 2026-06-08
 
-The v1.0.0 release candidate represents a complete deterministic debugging platform for AI agent traces.
+The v1.0.0 release represents a complete deterministic debugging platform for AI agent traces.
 
 ### Release hardening
 
@@ -18,6 +16,7 @@ The v1.0.0 release candidate represents a complete deterministic debugging platf
 - Benchmark, API, CLI, production readiness, demo, and contributor documentation.
 - Architecture diagram assets and repository validation tooling.
 - Release workflow for build, test, lint, type check, and artifact upload.
+- Final package metadata and artifact verification for the `v1.0.0` release.
 
 ### Platform capabilities
 
@@ -77,6 +76,5 @@ The v1.0.0 release candidate represents a complete deterministic debugging platf
 
 ## Notes
 
-- No v1.0.0 tag or GitHub release has been created yet.
 - Publishing to PyPI is intentionally not automated in the release workflow.
 - Hosted multi-tenant observability, authentication, database-backed report storage, and rich browser UI remain future work.
