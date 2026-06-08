@@ -4,7 +4,7 @@
 
 `hallucination-replay-system` is a Python debugging platform for AI agents. It loads structured execution traces, replays timelines, reconstructs agent-visible state, analyzes root causes, detects hallucinations against captured evidence, compares executions, and exposes the workflow through Python APIs, FastAPI endpoints, and lightweight dashboard helpers.
 
-> Status: v1.0.0 release-candidate ready. Current package version is `1.0.0rc1`; no `v1.0.0` tag or GitHub release has been created yet.
+> Status: v1.0.0 release-ready. Current package version is `1.0.0`; the release gate should pass before creating the `v1.0.0` tag and GitHub release.
 
 ## Why this exists
 
@@ -93,7 +93,7 @@ Build and verify release artifacts:
 ```bash
 rm -rf dist build *.egg-info
 python -m build
-python scripts/verify_release_artifacts.py --version 1.0.0rc1
+python scripts/verify_release_artifacts.py --version 1.0.0
 ```
 
 ## Demo workflow
@@ -182,12 +182,12 @@ See [docs/production_readiness.md](docs/production_readiness.md), [docs/security
 
 ## Roadmap
 
-### v1.0.0 release candidate
+### v1.0.0
 
-- Release-candidate metadata is set to `1.0.0rc1`.
+- Final release metadata is set to `1.0.0`.
 - Release documentation, repository presentation, release workflow, artifact verification, and validation script are in place.
 - Final release checks should confirm coverage, lint, typing, tests, build, artifact verification, and repository validation pass.
-- Do not publish or tag until explicitly approved.
+- Create the `v1.0.0` tag only after the full final gate passes.
 
 ### Future work
 
