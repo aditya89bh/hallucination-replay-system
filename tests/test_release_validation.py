@@ -16,7 +16,10 @@ def load_script_module(name: str, path: Path) -> ModuleType:
     return module
 
 
-validate_repo = load_script_module("validate_repo", ROOT / "scripts" / "validate_repo.py")
+validate_repo = load_script_module(
+    "validate_repo",
+    ROOT / "scripts" / "validate_repo.py",
+)
 verify_release_artifacts = load_script_module(
     "verify_release_artifacts",
     ROOT / "scripts" / "verify_release_artifacts.py",
