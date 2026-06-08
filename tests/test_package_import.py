@@ -8,4 +8,4 @@ def test_package_imports() -> None:
 
 
 def test_version_is_exported() -> None:
-    assert hallucination_replay.__version__ == "1.0.0rc1"
+    assert hallucination_replay.__version__ == "1.0.0"
